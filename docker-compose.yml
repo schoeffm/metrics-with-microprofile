@@ -1,0 +1,51 @@
+version: '3'
+services:
+
+  grafana:
+    image: grafana/grafana:6.7.1
+    ports:
+    - 3000:3000
+    depends_on:
+    - prometheus
+
+  prometheus:
+    image: prom/prometheus:v2.17.1
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+    ports:
+    - 9090:9090
+    depends_on:
+    - service_a
+    - service_b
+    - service_c
+
+  service_a:
+    build:
+      context: quarkus-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      - DE_BENDER_HELLO_WAIT_LOWERBOUND=0
+      - DE_BENDER_HELLO_WAIT_UPPERBOUND=200
+    ports:
+      - 8081:8080
+
+  service_b:
+    build:
+      context: quarkus-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      - DE_BENDER_HELLO_WAIT_LOWERBOUND=50
+      - DE_BENDER_HELLO_WAIT_UPPERBOUND=300
+    ports:
+      - 8082:8080
+
+  service_c:
+    build:
+      context: quarkus-service
+      dockerfile: src/main/docker/Dockerfile.jvm
+    environment:
+      - DE_BENDER_HELLO_WAIT_LOWERBOUND=400
+      - DE_BENDER_HELLO_WAIT_UPPERBOUND=1000
+    ports:
+      - 8083:8080
