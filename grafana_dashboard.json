@@ -61,7 +61,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(application_de_bender_metrics_HelloResource_simplyTimedHello_elapsedTime_seconds[3m]) / rate(application_de_bender_metrics_HelloResource_simplyTimedHello_total[3m])",
+          "expr": "rate(application_de_bender_metrics_HelloResource_simplyTimed_elapsedTime_seconds[3m]) / rate(application_de_bender_metrics_HelloResource_simplyTimed_total[3m])",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -152,7 +152,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum without(instance,job) (rate(application_de_bender_metrics_HelloResource_simplyTimedHello_elapsedTime_seconds[3m])) / sum without(instance,job) (rate(application_de_bender_metrics_HelloResource_simplyTimedHello_total[3m]))",
+          "expr": "sum without(instance,job) (rate(application_de_bender_metrics_HelloResource_simplyTimed_elapsedTime_seconds[3m])) / sum without(instance,job) (rate(application_de_bender_metrics_HelloResource_simplyTimed_total[3m]))",
           "instant": false,
           "interval": "",
           "legendFormat": "Avg. ResponseTime",
@@ -244,7 +244,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "application_de_bender_metrics_HelloResource_timedHello_mean_seconds",
+          "expr": "application_de_bender_metrics_HelloResource_timed_mean_seconds",
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
@@ -335,7 +335,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum without(job, instance) (application_de_bender_metrics_HelloResource_timedHello_mean_seconds) / count without(instance, job) ({__name__=~\"application.*mean_seconds\"})",
+          "expr": "sum without(job, instance) (application_de_bender_metrics_HelloResource_timed_mean_seconds) / count without(instance, job) ({__name__=~\"application.*mean_seconds\"})",
           "interval": "",
           "legendFormat": "Overall-Average??",
           "refId": "A"
@@ -403,5 +403,5 @@
   "variables": {
     "list": []
   },
-  "version": 2
+  "version": 1
 }
