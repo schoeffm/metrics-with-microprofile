@@ -6,7 +6,7 @@ do
     for service in 8081 8082 8083;
     do
         curl -s -o /dev/null "http://localhost:${service}/simplyHello" 2>&1
-        curl -s -o /dev/null "http://localhost:${service}/timedHello" 2>&1
+        # curl -s -o /dev/null "http://localhost:${service}/timedHello" 2>&1
     done
 
     if [[ "$n" -eq "0" ]]; then

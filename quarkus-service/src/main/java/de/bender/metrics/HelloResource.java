@@ -25,20 +25,10 @@ public class HelloResource {
     @ConfigProperty(name = "de.bender.hello.wait.upperBound", defaultValue = "1000")
     long upperBound;
 
-
-    @Path("/timedHello")
-    @GET
-    @Timed
-    public Response timedHello() {
-        final long pausedFor = executeHeavyComputation();
-        return Response
-                .ok(toReponseBody(pausedFor))
-                .build();
-    }
-
     @Path("/simplyHello")
     @GET
-    @SimplyTimed
+    @SimplyTimed(name = "simplyTimed")
+    @Timed(name = "timed")
     public Response simplyTimedHello() {
         final long pausedFor = executeHeavyComputation();
         return Response
